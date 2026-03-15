@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇIRAK AI | AO&MAZ Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #030303; color: #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glow-text { background: linear-gradient(135deg, #fff 0%, #555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card-hover:hover { transform: translateY(-10px); border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .cyber-grid { background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; }
+    </style>
+</head>
+<body class="cyber-grid">
+
+    <nav class="fixed top-0 w-full z-50 p-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-8 py-4">
+            <div class="text-xl font-extrabold tracking-tighter">
+                ÇIRAK <span class="text-blue-500">AI</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[11px] uppercase tracking-[0.2em] font-bold text-gray-400">
+                <a href="#projects" class="hover:text-white transition">Projeler</a>
+                <a href="#" class="hover:text-white transition">B2-Micro</a>
+                <a href="#" class="hover:text-red-500 transition">Kıyamet Paketi</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative pt-40 pb-20 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span>Yapay Zeka & Havacılık Operasyonları</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-extrabold glow-text mb-8 tracking-tighter leading-[0.9]">
+                Geleceği <br> Otonomlaştırıyoruz.
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-gray-500 text-lg md:text-xl font-light mb-12">
+                AO&MAZ Technology çatısı altında; yörünge araçlarından AI destekli giyilebilir sistemlere kadar çıraklık disipliniyle ustalık inşa ediyoruz.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#projects" class="bg-white text-black px-10 py-4 rounded-xl font-bold hover:scale-105 transition duration-300">Sistemleri Gör</a>
+                <a href="mailto:oguzhan@cirakai.com.tr" class="glass px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition duration-300">İletişim</a>
+            </div>
+        </div>
+    </main>
+
+    <section id="projects" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition"></div>
+                <div class="text-blue-500 font-bold text-xs mb-6 tracking-widest">UZAY ARACI</div>
+                <h3 class="text-2xl font-bold mb-4">B2-Micro</h3>
+                <p class="text-gray-500 leading-relaxed text-sm">60 ton kapasiteli, toryum tabanlı plazma motoruyla donatılmış yörünge lojistik sistemi.</p>
+            </div>
+
+            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group border-white/10">
+                <div class="text-green-500 font-bold text-xs mb-6 tracking-widest">GİYİLEBİLİR AI</div>
+                <h3 class="text-2xl font-bold mb-4">Çırak-1</h3>
+                <p class="text-gray-500 leading-relaxed text-sm">Saha operasyonları ve araç servisleri için geliştirilen Gemini destekli akıllı gözlük.</p>
+            </div>
+
+            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group border-red-500/10">
+                <div class="text-red-500 font-bold text-xs mb-6 tracking-widest">ÖZEL OPERASYON</div>
+                <h3 class="text-2xl font-bold mb-4">Kıyamet Paketi</h3>
+                <p class="text-gray-500 leading-relaxed text-sm italic">Stratejik savunma ve yüksek otonomi protokolleri içeren kapalı ekosistem.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="p-12 text-center border-t border-white/5">
+        <div class="text-[10px] text-gray-700 tracking-[0.8em] font-bold uppercase">
+            © 2026 AO&MAZ TECHNOLOGY | CIRAKAI.COM.TR
+        </div>
+    </footer>
+
+</body>
+</html>
