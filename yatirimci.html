@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO&MAZ | Yatırımcı Paneli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: #e5e7eb; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .neon-border { border: 1px solid #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
+
+    <div id="login-section" class="glass p-8 rounded-2xl w-full max-w-md text-center">
+        <h2 class="text-3xl font-bold mb-6 text-blue-500 tracking-wider">GİZLİ ERİŞİM</h2>
+        <p class="text-sm text-gray-400 mb-8">Bu bölüm yalnızca akredite yatırımcılar ve yetkili iş ortakları içindir. Gizlilik Sözleşmesi (NDA) şartları geçerlidir.</p>
+        
+        <input type="password" id="investor-password" placeholder="Şifreyi Giriniz" 
+               class="w-full bg-black border border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:border-blue-500 transition-all text-center">
+        
+        <button onclick="checkAccess()" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all">
+            ERİŞİMİ DOĞRULA
+        </button>
+        <p id="error-msg" class="text-red-500 mt-4 text-sm hidden">Hatalı Şifre. Yetkisiz erişim denemesi kaydedildi.</p>
+    </div>
+
+    <div id="secret-room" class="hidden w-full max-w-5xl">
+        <div class="glass p-10 rounded-3xl border-l-4 border-blue-500">
+            <h1 class="text-4xl font-black mb-6 tracking-tighter uppercase text-white">B2-Micro: Kıyamet Paketi Stratejik Sunum</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
+                    <h3 class="text-blue-400 font-bold mb-2">Finansal Hedef</h3>
+                    <p class="text-gray-300">Yörünge lojistiği ve nükleer atık yönetimi pazarında 2030 yılına kadar %15 pazar payı.</p>
+                </div>
+                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
+                    <h3 class="text-blue-400 font-bold mb-2">Teknik Üstünlük</h3>
+                    <p class="text-gray-300">Plazma itki sistemleri ve otonom derin uzay navigasyonu ile %40 maliyet avantajı.</p>
+                </div>
+            </div>
+            <button class="mt-8 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-all">
+                Sunum Dosyasını İndir (PDF)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function checkAccess() {
+            const pass = document.getElementById('investor-password').value;
+            const error = document.getElementById('error-msg');
+            
+            // Belirlediğimiz şifre: 131869.Akrohan1
+            if (pass === "131869.Akrohan1") {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('secret-room').classList.remove('hidden');
+            } else {
+                error.classList.remove('hidden');
+                setTimeout(() => error.classList.add('hidden'), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
