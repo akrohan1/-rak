@@ -3,151 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÇIRAK AI | AO&MAZ Technology</title>
+    <title>ÇIRAK | CirakAI - Oğuzhan YUMAK</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #030303; color: #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .glow-text { background: linear-gradient(135deg, #fff 0%, #555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card-hover { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card-hover:hover { transform: translateY(-10px); border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .cyber-grid { background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; }
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .gradient-text { background: linear-gradient(90deg, #ffffff, #666666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .border-glow { border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; }
+        .border-glow:hover { border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 0 30px rgba(255,255,255,0.03); transform: translateY(-5px); }
+        .hero-bg { background: radial-gradient(circle at top, #111 0%, #050505 100%); }
     </style>
 </head>
-<body class="cyber-grid">
+<body class="antialiased hero-bg">
 
-    <nav class="fixed top-0 w-full z-50 p-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-8 py-4">
-            <div class="text-xl font-extrabold tracking-tighter">
-                ÇIRAK <span class="text-blue-500">AI</span>
-            </div>
-            <div class="hidden md:flex space-x-8 text-[11px] uppercase tracking-[0.2em] font-bold text-gray-400">
-                <a href="#projects" class="hover:text-white transition">Projeler</a>
-                <a href="#" class="hover:text-white transition">B2-Micro</a>
-                <a href="#" class="hover:text-red-500 transition">Kıyamet Paketi</a>
-            </div>
+    <nav class="p-8 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="text-2xl font-bold tracking-tighter hover:opacity-80 cursor-pointer transition">
+            ÇI<span class="text-red-600">-</span>RAK
+        </div>
+        <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">
+            <a href="#sistemler" class="hover:text-white transition">Teknoloji</a>
+            <a href="#" class="hover:text-white transition">B2-Micro</a>
+            <a href="yatirimci.html" class="hover:text-red-700 transition font-extrabold border-b border-red-900/30 pb-1">GİZLİ VERİ ODASI</a>
         </div>
     </nav>
 
-    <main class="relative pt-40 pb-20 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-8">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                </span>
-                <span>Yapay Zeka & Havacılık Operasyonları</span>
-            </div>
-            
-            <h1 class="text-6xl md:text-8xl font-extrabold glow-text mb-8 tracking-tighter leading-[0.9]">
-                Geleceği <br> Otonomlaştırıyoruz.
-            </h1>
-            
-            <p class="max-w-2xl mx-auto text-gray-500 text-lg md:text-xl font-light mb-12">
-                AO&MAZ Technology çatısı altında; yörünge araçlarından AI destekli giyilebilir sistemlere kadar çıraklık disipliniyle ustalık inşa ediyoruz.
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#projects" class="bg-white text-black px-10 py-4 rounded-xl font-bold hover:scale-105 transition duration-300">Sistemleri Gör</a>
-                <a href="mailto:oguzhan@cirakai.com.tr" class="glass px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition duration-300">İletişim</a>
-            </div>
+    <section class="mt-24 text-center px-6">
+        <div class="inline-block px-4 py-1 border border-red-900 rounded-full text-[10px] uppercase tracking-widest text-red-500 mb-8 font-bold animate-pulse">
+            Active Proposal: SPX-K64 | CirakAI Project
         </div>
-    </main>
+        <h1 class="text-5xl md:text-8xl font-extrabold gradient-text mb-8 tracking-tighter leading-none">
+            Geleceği Eğitiyoruz.
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-gray-400 text-sm md:text-lg leading-relaxed font-light mb-12">
+            <span class="text-white font-bold">CirakAI</span> bünyesinde; yörünge transfer araçlarından, **AI modülasyonlu** plazma itki sistemlerine kadar; tüm süreçleri <span class="text-white font-bold uppercase">Oğuzhan YUMAK</span> vizyonu ve ticari sır korumalı teknolojilerle inşa ediyoruz.
+        </p>
 
-    <section id="projects" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group">
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition"></div>
-                <div class="text-blue-500 font-bold text-xs mb-6 tracking-widest">UZAY ARACI</div>
-                <h3 class="text-2xl font-bold mb-4">B2-Micro</h3>
-                <p class="text-gray-500 leading-relaxed text-sm">60 ton kapasiteli, toryum tabanlı plazma motoruyla donatılmış yörünge lojistik sistemi.</p>
-            </div>
-
-            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group border-white/10">
-                <div class="text-green-500 font-bold text-xs mb-6 tracking-widest">GİYİLEBİLİR AI</div>
-                <h3 class="text-2xl font-bold mb-4">Çırak-1</h3>
-                <p class="text-gray-500 leading-relaxed text-sm">Saha operasyonları ve araç servisleri için geliştirilen Gemini destekli akıllı gözlük.</p>
-            </div>
-
-            <div class="glass p-10 rounded-[2rem] card-hover relative overflow-hidden group border-red-500/10">
-                <div class="text-red-500 font-bold text-xs mb-6 tracking-widest">ÖZEL OPERASYON</div>
-                <h3 class="text-2xl font-bold mb-4">Kıyamet Paketi</h3>
-                <p class="text-gray-500 leading-relaxed text-sm italic">Stratejik savunma ve yüksek otonomi protokolleri içeren kapalı ekosistem.</p>
-            </div>
+        <div class="mt-12 flex flex-col md:flex-row justify-center gap-4">
+            <a href="#sistemler" class="bg-white text-black px-12 py-4 rounded-xl font-bold hover:bg-gray-200 transition text-xs tracking-widest uppercase shadow-xl shadow-white/5 text-center">SİSTEMLERİ GÖR</a>
+            <a href="mailto:iletisim@cirakai.com.tr" class="border border-gray-800 text-gray-400 px-12 py-4 rounded-xl font-bold hover:bg-white hover:text-black hover:border-white transition text-xs tracking-widest uppercase flex items-center justify-center">İLETİŞİM</a>
         </div>
     </section>
 
-    <footer class="p-12 text-center border-t border-white/5">
-        <div class="text-[10px] text-gray-700 tracking-[0.8em] font-bold uppercase">
-            © 2026 AO&MAZ TECHNOLOGY | CIRAKAI.COM.TR
+    <section id="sistemler" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-40 px-6 pb-20">
+        
+        <div class="p-10 border-glow rounded-3xl bg-[#0a0a0a] border-red-900/10 relative overflow-hidden">
+            <div class="text-xs text-red-500 font-bold mb-4 uppercase tracking-widest">Amiral Gemisi / OTV</div>
+            <h3 class="text-2xl font-bold mb-4 text-white">KRONOS-V64</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">Nükleer olmayan, **AI modülasyonlu** plazma motorlu kargo transfer sistemi. Starship mimarisiyle tam entegre.</p>
+            <a href="yatirimci.html" class="text-[10px] text-red-500 font-extrabold border-b border-red-900 pb-1 tracking-widest uppercase">Gizli Teknik Veri →</a>
+        </div>
+
+        <div class="p-10 border-glow rounded-3xl bg-[#080808]">
+            <div class="text-xs text-blue-500 font-bold mb-4 uppercase tracking-widest">Uzay Aracı</div>
+            <h3 class="text-2xl font-bold mb-4 text-white">B2-Micro</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">60 ton kapasiteli, toryum tabanlı plazma motorlu yörünge lojistik sistemi. Derin uzay operasyonları.</p>
+            <a href="#" class="text-[10px] text-gray-600 font-bold border-b border-gray-800 pb-1 tracking-widest uppercase hover:text-white transition">Detaylı İncele</a>
+        </div>
+
+        <div class="p-10 border-glow rounded-3xl bg-[#080808]">
+            <div class="text-xs text-green-500 font-bold mb-4 uppercase tracking-widest">Giyilebilir AI</div>
+            <h3 class="text-2xl font-bold mb-4 text-white">Çırak-1</h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">Saha operasyonları ve teknik servis için AI destekli endüstriyel akıllı gözlük ekosistemi.</p>
+            <a href="#" class="text-[10px] text-gray-600 font-bold border-b border-gray-800 pb-1 tracking-widest uppercase hover:text-white transition">Dokümantasyon</a>
+        </div>
+    </section>
+
+    <footer class="mt-20 p-12 border-t border-gray-900 text-center">
+        <div class="text-[11px] text-white tracking-[0.5em] uppercase font-bold mb-2">
+            © 2026 CIRAKAI | OĞUZHAN YUMAK
+        </div>
+        <div class="text-[9px] text-gray-700 uppercase tracking-[0.3em]">
+            Tüm Hakları Saklıdır. All Rights Reserved.
         </div>
     </footer>
 
 </body>
-</html>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AO&MAZ | Yatırımcı Paneli</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #050505; color: #e5e7eb; font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .neon-border { border: 1px solid #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
-    </style>
-</head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
-
-    <div id="login-section" class="glass p-8 rounded-2xl w-full max-w-md text-center">
-        <h2 class="text-3xl font-bold mb-6 text-blue-500 tracking-wider">GİZLİ ERİŞİM</h2>
-        <p class="text-sm text-gray-400 mb-8">Bu bölüm yalnızca akredite yatırımcılar ve yetkili iş ortakları içindir. Gizlilik Sözleşmesi (NDA) şartları geçerlidir.</p>
-        
-        <input type="password" id="investor-password" placeholder="Şifreyi Giriniz" 
-               class="w-full bg-black border border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:border-blue-500 transition-all text-center">
-        
-        <button onclick="checkAccess()" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all">
-            ERİŞİMİ DOĞRULA
-        </button>
-        <p id="error-msg" class="text-red-500 mt-4 text-sm hidden">Hatalı Şifre. Yetkisiz erişim denemesi kaydedildi.</p>
-    </div>
-
-    <div id="secret-room" class="hidden w-full max-w-5xl">
-        <div class="glass p-10 rounded-3xl border-l-4 border-blue-500">
-            <h1 class="text-4xl font-black mb-6 tracking-tighter uppercase text-white">B2-Micro: Kıyamet Paketi Stratejik Sunum</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
-                    <h3 class="text-blue-400 font-bold mb-2">Finansal Hedef</h3>
-                    <p class="text-gray-300">Yörünge lojistiği ve nükleer atık yönetimi pazarında 2030 yılına kadar %15 pazar payı.</p>
-                </div>
-                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
-                    <h3 class="text-blue-400 font-bold mb-2">Teknik Üstünlük</h3>
-                    <p class="text-gray-300">Plazma itki sistemleri ve otonom derin uzay navigasyonu ile %40 maliyet avantajı.</p>
-                </div>
-            </div>
-            <button class="mt-8 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-all">
-                Sunum Dosyasını İndir (PDF)
-            </button>
-        </div>
-    </div>
-
-    <script>
-        function checkAccess() {
-            const pass = document.getElementById('investor-password').value;
-            const error = document.getElementById('error-msg');
-            
-            // Belirlediğimiz şifre: 131869.Akrohan1
-            if (pass === "131869.Akrohan1") {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('secret-room').classList.remove('hidden');
-            } else {
-                error.classList.remove('hidden');
-                setTimeout(() => error.classList.add('hidden'), 3000);
-            }
-        }
-    </script>
-</body>
-</html>
+</html
