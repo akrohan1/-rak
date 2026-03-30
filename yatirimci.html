@@ -3,63 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AO&MAZ | Yatırımcı Paneli</title>
+    <title>VDR Panel | CirakAI - KRONOS-V64</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #e5e7eb; font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .neon-border { border: 1px solid #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
+        .vdr-card { background: #0a0a0a; border: 1px solid rgba(239, 68, 68, 0.1); transition: 0.3s; }
+        .vdr-card:hover { border: 1px solid rgba(239, 68, 68, 0.3); }
+        .status-pulse { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .secret-blur { filter: blur(5px); user-select: none; pointer-events: none; }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
+<body class="p-4 md:p-12">
 
-    <div id="login-section" class="glass p-8 rounded-2xl w-full max-w-md text-center">
-        <h2 class="text-3xl font-bold mb-6 text-blue-500 tracking-wider">GİZLİ ERİŞİM</h2>
-        <p class="text-sm text-gray-400 mb-8">Bu bölüm yalnızca akredite yatırımcılar ve yetkili iş ortakları içindir. Gizlilik Sözleşmesi (NDA) şartları geçerlidir.</p>
-        
-        <input type="password" id="investor-password" placeholder="Şifreyi Giriniz" 
-               class="w-full bg-black border border-gray-700 rounded-lg p-3 mb-4 focus:outline-none focus:border-blue-500 transition-all text-center">
-        
-        <button onclick="checkAccess()" 
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all">
-            ERİŞİMİ DOĞRULA
-        </button>
-        <p id="error-msg" class="text-red-500 mt-4 text-sm hidden">Hatalı Şifre. Yetkisiz erişim denemesi kaydedildi.</p>
-    </div>
-
-    <div id="secret-room" class="hidden w-full max-w-5xl">
-        <div class="glass p-10 rounded-3xl border-l-4 border-blue-500">
-            <h1 class="text-4xl font-black mb-6 tracking-tighter uppercase text-white">B2-Micro: Kıyamet Paketi Stratejik Sunum</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
-                    <h3 class="text-blue-400 font-bold mb-2">Finansal Hedef</h3>
-                    <p class="text-gray-300">Yörünge lojistiği ve nükleer atık yönetimi pazarında 2030 yılına kadar %15 pazar payı.</p>
-                </div>
-                <div class="p-6 bg-black/40 rounded-xl border border-white/5">
-                    <h3 class="text-blue-400 font-bold mb-2">Teknik Üstünlük</h3>
-                    <p class="text-gray-300">Plazma itki sistemleri ve otonom derin uzay navigasyonu ile %40 maliyet avantajı.</p>
-                </div>
-            </div>
-            <button class="mt-8 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-all">
-                Sunum Dosyasını İndir (PDF)
-            </button>
+    <nav class="flex justify-between items-center max-w-7xl mx-auto mb-16 border-b border-gray-900 pb-8">
+        <div class="flex items-center gap-4">
+            <div class="text-2xl font-bold tracking-tighter">ÇI<span class="text-red-600">-</span>RAK</div>
+            <div class="h-4 w-px bg-gray-800"></div>
+            <div class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">VDR / SECURE ACCESS</div>
         </div>
-    </div>
+        <div class="flex items-center gap-4">
+            <span class="status-pulse"></span>
+            <span class="text-[10px] text-red-500 font-bold uppercase tracking-widest">Live Node: TR-KOC-01</span>
+        </div>
+    </nav>
 
-    <script>
-        function checkAccess() {
-            const pass = document.getElementById('investor-password').value;
-            const error = document.getElementById('error-msg');
+    <main class="max-w-7xl mx-auto">
+        <div class="bg-red-950/10 border border-red-900/30 p-6 rounded-2xl mb-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h2 class="text-red-500 font-bold text-xs uppercase tracking-widest mb-1">Gizlilik Bildirimi (NDA)</h2>
+                <p class="text-[11px] text-gray-400">Bu sayfadaki veriler Oğuzhan YUMAK mülkiyetindeki tescilli ticari sırlardır. İzinsiz paylaşımı suçtur.</p>
+            </div>
+            <div class="text-[10px] text-gray-500 font-mono">IP: 192.XXX.XX.XX | LOG_ID: 2026-SPX-K64</div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
             
-            // Belirlediğimiz şifre: 131869.Akrohan1
-            if (pass === "131869.Akrohan1") {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('secret-room').classList.remove('hidden');
-            } else {
-                error.classList.remove('hidden');
-                setTimeout(() => error.classList.add('hidden'), 3000);
-            }
-        }
-    </script>
+            <div class="vdr-card p-8 rounded-3xl">
+                <div class="text-gray-500 text-[10px] font-bold uppercase mb-4 tracking-widest">MHD Energy Scavenging</div>
+                <div class="text-4xl font-extrabold mb-2 text-white">18.35 <span class="text-lg text-gray-600">kW</span></div>
+                <div class="text-[10px] text-green-500 font-bold">+14.2% Efficiency Gain</div>
+                <p class="text-gray-600 text-[11px] mt-4 leading-relaxed">Fraktal elektrot geometrisi ile plazma kinetik enerjisi bataryaya geri beslenir.</p>
+            </div>
+
+            <div class="vdr-card p-8 rounded-3xl">
+                <div class="text-gray-500 text-[10px] font-bold uppercase mb-4 tracking-widest">Resonance Frequency</div>
+                <div class="text-4xl font-extrabold mb-2 text-white secret-blur">4.956 MHz</div>
+                <div class="text-[10px] text-red-500 font-bold uppercase tracking-widest">TİCARİ SIR / ENCRYPTED</div>
+                <p class="text-gray-600 text-[11px] mt-4 leading-relaxed">Cirak-1 AI modülasyonu ile milisaniyelik frekans atlamaları (FHSS) uygulanır.</p>
+            </div>
+
+            <div class="vdr-card p-8 rounded-3xl">
+                <div class="text-gray-500 text-[10px] font-bold uppercase mb-4 tracking-widest">Radiation Attenuation</div>
+                <div class="text-4xl font-extrabold mb-2 text-white">98.2<span class="text-lg text-gray-600">%</span></div>
+                <div class="text-[10px] text-blue-500 font-bold uppercase tracking-widest">Gyroid Lattice Structure</div>
+                <p class="text-gray-600 text-[11px] mt-4 leading-relaxed">Kozmik radyasyon, 3D baskı Gyroid geometrisi ile sönümlenir.</p>
+            </div>
+        </div>
+
+        <div class="vdr-card p-10 rounded-3xl">
+            <h3 class="text-xs font-bold uppercase tracking-widest mb-8 text-gray-400">KRONOS-V64 Tepe İtki Kararlılığı (MHD Aktif)</h3>
+            <div class="h-48 w-full bg-gradient-to-t from-red-950/20 to-transparent border-l border-b border-gray-800 relative">
+                <div class="absolute bottom-[40%] left-0 w-full h-px bg-red-600/30"></div>
+                <div class="absolute bottom-[60%] left-0 w-full h-px bg-red-600/10"></div>
+                <div class="text-[9px] text-red-900 absolute -left-6 bottom-[40%]">75%</div>
+                <div class="text-[9px] text-red-900 absolute -left-6 bottom-[60%]">100%</div>
+            </div>
+            <div class="mt-6 flex justify-between text-[9px] text-gray-600 uppercase tracking-widest">
+                <span>0s (Ignition)</span>
+                <span>450s (Max Thrust)</span>
+                <span>900s (Orbital Entry)</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 p-12 text-center">
+        <div class="text-[11px] text-gray-600 tracking-[0.5em] uppercase font-bold mb-4">
+            © 2026 CIRAKAI | OĞUZHAN YUMAK
+        </div>
+    </footer>
+
 </body>
 </html>
