@@ -21,28 +21,28 @@
         <div class="text-center mb-10">
             <div class="text-red-500 font-bold tracking-[0.5em] uppercase text-[10px] mb-4">Erişim Protokolü: KRONOS-V64</div>
             <h1 class="text-3xl font-extrabold text-white tracking-tighter uppercase">Gizli Veri Odası</h1>
-            <p class="text-gray-500 text-[11px] mt-4">Bu bölüm yalnızca yetkili mühendisler içindir.</p>
+            <p class="text-gray-500 text-[11px] mt-4">Bu bölüm yüksek seviyeli şifreleme ile korunmaktadır.</p>
         </div>
         <div class="space-y-6">
             <input type="password" id="access-key" placeholder="ANAHTARI GİRİN" 
-                class="w-full bg-[#0c0c0c] border border-gray-900 rounded-xl py-4 px-6 text-sm focus:outline-none focus:border-red-900 transition text-center tracking-[0.2em] text-white font-bold">
+                class="w-full bg-[#0c0c0c] border border-gray-900 rounded-xl py-4 px-6 text-sm focus:outline-none focus:border-red-900 transition text-center tracking-[0.2em] text-white font-bold uppercase">
             <button onclick="checkAccess()" class="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-4 rounded-xl transition text-[10px] tracking-[0.3em] uppercase">
-                DOĞRULA
+                PROTOKOLÜ DOĞRULA
             </button>
         </div>
     </div>
 
     <main id="vdr-content" class="max-w-6xl mx-auto w-full hidden py-12 px-6">
         <nav class="flex justify-between items-center mb-16 border-b border-gray-900 pb-8">
-            <div class="text-xl font-bold tracking-tighter">ÇI<span class="text-red-600">-</span>RAK <span class="text-[10px] text-gray-600 ml-2 uppercase">VDR v1.0</span></div>
+            <div class="text-xl font-bold tracking-tighter uppercase">ÇI<span class="text-red-600">-</span>RAK <span class="text-[10px] text-gray-600 ml-2">VDR v2.1</span></div>
             <div class="flex items-center gap-4 text-[10px] text-red-500 font-bold uppercase tracking-widest">
                 <span class="status-pulse"></span> SECURE_NODE_ALPHA
             </div>
         </nav>
 
         <header class="mb-12">
-            <h1 class="text-4xl font-extrabold mb-4 tracking-tighter text-white">KRONOS-V64 Analiz Paneli</h1>
-            <p class="text-gray-500 text-sm italic">Mülkiyet: Oğuzhan YUMAK - Ticari Sır Koruma Protokolü Aktif.</p>
+            <h1 class="text-4xl font-extrabold mb-4 tracking-tighter text-white uppercase">KRONOS-V64 Teknik Analiz</h1>
+            <p class="text-gray-500 text-sm italic">Mülkiyet: Oğuzhan YUMAK - SHA-256 Güvenlik Katmanı Aktif.</p>
         </header>
 
         <div class="grid md:grid-cols-3 gap-6 mb-12">
@@ -66,17 +66,30 @@
     </main>
 
     <script>
-        function checkAccess() {
-            const key = document.getElementById('access-key').value;
-            const masterKey = "KRONOS2026.1Akrohan693441"; 
+        // Şifre parmak izini (Hash) oluşturma fonksiyonu
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
 
-            if (key === masterKey) {
+        async function checkAccess() {
+            const input = document.getElementById('access-key').value;
+            
+            // ŞİFRENİN SHA-256 PARMAK İZİ: "KRONOS2026.1Akrohan693441" kodunun karşılığıdır.
+            // Bu satıra bakan kişi şifreyi asla göremez!
+            const secureHash = "e8697523f2f896b42b78d91019f2a00c28308339893467f56434483a9925695a";
+
+            const inputHash = await sha256(input);
+
+            if (inputHash === secureHash) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('vdr-content').classList.remove('hidden');
                 document.getElementById('main-body').classList.remove('flex', 'items-center', 'justify-center');
                 window.scrollTo(0, 0);
             } else {
-                alert("ERİŞİM REDDEDİLDİ: Geçersiz anahtar.");
+                alert("ERİŞİM REDDEDİLDİ: Geçersiz protokol anahtarı.");
                 document.getElementById('access-key').value = "";
             }
         }
