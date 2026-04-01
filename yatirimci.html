@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VDR | CirakAI Stratejik Veri Odası</title>
+    <title>VDR | CirakAI KRONOS-V64</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; }
-        .vdr-card { background: #0a0a0a; border: 1px solid rgba(239, 68, 68, 0.1); }
-        .secret-blur { filter: blur(6px); user-select: none; }
+        body { background-color: #050505; color: #e5e5e5; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .vdr-card { background: #0a0a0a; border: 1px solid rgba(239, 68, 68, 0.1); transition: 0.3s; }
+        .vdr-card:hover { border: 1px solid rgba(239, 68, 68, 0.3); }
+        .secret-blur { filter: blur(7px); transition: 0.5s; user-select: none; }
         .status-pulse { width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
     </style>
@@ -21,7 +22,7 @@
         <div class="text-center mb-10">
             <div class="text-red-500 font-bold tracking-[0.5em] uppercase text-[10px] mb-4">Erişim Protokolü: KRONOS-V64</div>
             <h1 class="text-3xl font-extrabold text-white tracking-tighter uppercase">Gizli Veri Odası</h1>
-            <p class="text-gray-500 text-[11px] mt-4">Bu bölüm yüksek seviyeli şifreleme ile korunmaktadır.</p>
+            <p class="text-gray-500 text-[11px] mt-4">Tüm aktiviteler Cirak-1 AI tarafından loglanmaktadır.</p>
         </div>
         <div class="space-y-6">
             <input type="password" id="access-key" placeholder="ANAHTARI GİRİN" 
@@ -33,40 +34,52 @@
     </div>
 
     <main id="vdr-content" class="max-w-6xl mx-auto w-full hidden py-12 px-6">
-        <nav class="flex justify-between items-center mb-16 border-b border-gray-900 pb-8">
-            <div class="text-xl font-bold tracking-tighter uppercase">ÇI<span class="text-red-600">-</span>RAK <span class="text-[10px] text-gray-600 ml-2">VDR v2.1</span></div>
+        <nav class="flex justify-between items-center mb-12 border-b border-gray-900 pb-8">
+            <div class="text-xl font-bold tracking-tighter uppercase">ÇI<span class="text-red-600">-</span>RAK <span class="text-[10px] text-gray-600 ml-2">VDR v2.5</span></div>
             <div class="flex items-center gap-4 text-[10px] text-red-500 font-bold uppercase tracking-widest">
                 <span class="status-pulse"></span> SECURE_NODE_ALPHA
             </div>
         </nav>
 
         <header class="mb-12">
-            <h1 class="text-4xl font-extrabold mb-4 tracking-tighter text-white uppercase">KRONOS-V64 Teknik Analiz</h1>
-            <p class="text-gray-500 text-sm italic">Mülkiyet: Oğuzhan YUMAK - SHA-256 Güvenlik Katmanı Aktif.</p>
+            <h1 class="text-4xl font-extrabold mb-4 tracking-tighter text-white">KRONOS-V64 Analiz Paneli</h1>
+            <p class="text-gray-500 text-sm">Oğuzhan YUMAK Mülkiyetindeki Ticari Sırlar - SHA-256 Korumalı.</p>
         </header>
 
         <div class="grid md:grid-cols-3 gap-6 mb-12">
             <div class="vdr-card p-8 rounded-3xl text-center">
-                <div class="text-[9px] text-gray-500 uppercase font-bold mb-4 tracking-widest">MHD Recovery</div>
+                <div class="text-[9px] text-gray-500 uppercase font-bold mb-3 tracking-widest">MHD Recovery</div>
                 <div class="text-4xl font-extrabold text-white">18.35 kW</div>
             </div>
             <div class="vdr-card p-8 rounded-3xl text-center">
-                <div class="text-[9px] text-gray-500 uppercase font-bold mb-4 tracking-widest">Resonance</div>
-                <div class="text-4xl font-extrabold text-white secret-blur">4.956 MHz</div>
+                <div class="text-[9px] text-gray-500 uppercase font-bold mb-3 tracking-widest">Mission Delta-V</div>
+                <div class="text-4xl font-extrabold text-white">9.4 km/s</div>
             </div>
             <div class="vdr-card p-8 rounded-3xl text-center">
-                <div class="text-[9px] text-gray-500 uppercase font-bold mb-4 tracking-widest">Shielding</div>
-                <div class="text-4xl font-extrabold text-white">98.2%</div>
+                <div class="text-[9px] text-gray-500 uppercase font-bold mb-3 tracking-widest">System Status</div>
+                <div class="text-4xl font-extrabold text-yellow-600">TRL 5</div>
             </div>
         </div>
 
-        <footer class="mt-24 pt-12 border-t border-gray-900 text-center text-[10px] text-gray-600 uppercase tracking-[0.5em]">
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="vdr-card p-8 rounded-3xl">
+                <h3 class="text-blue-500 text-[10px] font-bold uppercase tracking-widest mb-6">Orbital Delta-V Analysis (15t Payload)</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">ISP: 4,800s | Manyetik Boğaz Modülasyonu ile TMI manevrası optimize edilmiştir.</p>
+                <div class="h-1 bg-gray-900 w-full rounded-full"><div class="h-1 bg-blue-600 w-[94%]"></div></div>
+            </div>
+            <div class="vdr-card p-8 rounded-3xl">
+                <h3 class="text-red-500 text-[10px] font-bold uppercase tracking-widest mb-6">Energy Budget (MHD-B Mode)</h3>
+                <p class="text-[11px] text-gray-400 leading-relaxed mb-4">Battery Density: 520 Wh/kg (Solid-State). Recovery Efficiency: 18.3% via Kinetic Braking.</p>
+                <div class="h-1 bg-gray-900 w-full rounded-full"><div class="h-1 bg-red-600 w-[18%]"></div></div>
+            </div>
+        </div>
+
+        <footer class="mt-20 pt-12 border-t border-gray-900 text-center text-[10px] text-gray-600 uppercase tracking-[0.5em]">
             © 2026 CIRAKAI | OĞUZHAN YUMAK
         </footer>
     </main>
 
     <script>
-        // Şifre parmak izini (Hash) oluşturma fonksiyonu
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -76,9 +89,7 @@
 
         async function checkAccess() {
             const input = document.getElementById('access-key').value;
-            
-            // ŞİFRENİN SHA-256 PARMAK İZİ: "KRONOS2026.1Akrohan693441" kodunun karşılığıdır.
-            // Bu satıra bakan kişi şifreyi asla göremez!
+            // "KRONOS2026.1Akrohan693441" kodunun SHA-256 Hash karşılığıdır.
             const secureHash = "e8697523f2f896b42b78d91019f2a00c28308339893467f56434483a9925695a";
 
             const inputHash = await sha256(input);
