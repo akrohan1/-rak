@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CIRAKAI ENGINE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        input {
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;
+            background: #22c55e;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        #sonuc {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🚀 CIRAKAI ENGINE</h1>
+
+    <p>Mühendislik hesaplamaları yap</p>
+
+    <input id="input" placeholder="Örn: 10 5 2">
+
+    <button onclick="hesapla()">HESAPLA</button>
+
+    <div id="sonuc"></div>
+</div>
+
+<script>
+function hesapla() {
+    let text = document.getElementById("input").value;
+
+    document.getElementById("sonuc").innerHTML = "Hesaplanıyor...";
+}
+</script>
+
+</body>
+</html>
