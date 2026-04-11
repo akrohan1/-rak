@@ -1,119 +1,101 @@
 from flask import Flask, request, jsonify, render_template_string
+import requests
+import os
 
 app = Flask(__name__)
 
-html = """
+API_KEY = "BURAYA_API_KEY"
+
+# ================= HTML =================
+html = """ 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CIRAKAI ENGINE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            margin-top: 80px;
-        }
-        .box {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 20px;
-            display: inline-block;
-            width: 90%;
-            max-width: 400px;
-        }
-        input {
-            padding: 12px;
-            width: 100%;
-            border-radius: 10px;
-            border: none;
-            margin-top: 20px;
-        }
-        button {
-            padding: 12px;
-            margin-top: 20px;
-            border-radius: 10px;
-            border: none;
-            background: #22c55e;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-        }
-        #sonuc {
-            margin-top: 25px;
-            font-size: 18px;
-            color: #38bdf8;
-        }
-    </style>
+<title>CIRAKAI ENGINE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{background:#0f172a;color:white;font-family:Arial;text-align:center;margin-top:80px;}
+.box{background:#1e293b;padding:30px;border-radius:20px;display:inline-block;width:90%;max-width:500px;}
+textarea{width:100%;padding:10px;border-radius:10px;border:none;margin-top:10px;}
+button{margin-top:10px;padding:12px;border:none;border-radius:10px;background:#22c55e;color:white;}
+#sonuc{margin-top:20px;color:#38bdf8;}
+</style>
 </head>
 
 <body>
 <div class="box">
-    <h1>🚀 CIRAKAI ENGINE</h1>
-    <p>Mühendislik hesaplama asistanı</p>
+<h1>🚀 CIRAKAI ENGINE</h1>
 
-    <input id="input" placeholder="Örn: 10 5 2">
-    <button onclick="hesapla()">HESAPLA</button>
+<textarea id="input" placeholder="Sorunu yaz..."></textarea>
+<button onclick="gonder()">GÖNDER</button>
 
-    <div id="sonuc"></div>
+<div id="sonuc"></div>
 </div>
 
 <script>
-function hesapla() {
+function gonder(){
     let text = document.getElementById("input").value;
 
-    fetch("/analyze", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ text: text })
+    document.getElementById("sonuc").innerText = "Yükleniyor...";
+
+    fetch("/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({message:text})
     })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("sonuc").innerHTML =
-            "İvme: " + data.ivme + "<br>" +
-            "Kuvvet: " + data.kuvvet + "<br>" +
-            "Enerji: " + data.enerji;
+    .then(res=>res.json())
+    .then(data=>{
+        document.getElementById("sonuc").innerText = data.reply;
     })
+    .catch(()=>{
+        document.getElementById("sonuc").innerText = "Hata oluştu";
+    });
 }
 </script>
+
 </body>
 </html>
 """
+
+# ================= ROUTES =================
 
 @app.route("/")
 def home():
     return render_template_string(html)
 
-@app.route("/analyze", methods=["POST"])
-def analyze():
+@app.route("/chat", methods=["POST"])
+def chat():
     data = request.json
-    text = data.get("text", "")
+    user_msg = data.get("message", "")
+
+    headers = {
+        "x-api-key": API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
+    }
+
+    body = {
+        "model": "claude-3-sonnet-20240229",
+        "max_tokens": 500,
+        "messages": [
+            {"role": "user", "content": user_msg}
+        ]
+    }
 
     try:
-        numbers = [float(x) for x in text.split()]
+        res = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers=headers,
+            json=body
+        )
 
-        if len(numbers) >= 3:
-            m, v, t = numbers[0], numbers[1], numbers[2]
-
-            a = v / t
-            F = m * a
-            E = 0.5 * m * v**2
-
-            return jsonify({
-                "ivme": round(a, 2),
-                "kuvvet": round(F, 2),
-                "enerji": round(E, 2)
-            })
+        data = res.json()
+        reply = data["content"][0]["text"]
 
     except:
-        pass
+        reply = "AI bağlantı hatası"
 
-    return jsonify({"ivme": 0, "kuvvet": 0, "enerji": 0})
-
+    return jsonify({"reply": reply})
 
 if __name__ == "__main__":
     app.run()
