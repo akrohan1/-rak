@@ -1,79 +1,861 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <title>CIRAKAI ENGINE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#0d1117"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>CIRAKAI ENGINE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  background:#0d1117;
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:#e6edf3;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+}
 
-    <style>
-        body {
-            font-family: Arial;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            margin-top: 80px;
-        }
+/* ── Arka plan ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(33,110,240,0.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 100%,rgba(46,213,115,0.05) 0%,transparent 50%);
+  pointer-events:none;
+}
 
-        .box {
-            background: #1e293b;
-            padding: 30px;
-            border-radius: 20px;
-            display: inline-block;
-            width: 90%;
-            max-width: 400px;
-        }
+/* ── Header ── */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  background:rgba(13,17,23,0.85);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#1a6ef0,#2ed573);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;box-shadow:0 0 16px rgba(26,110,240,0.4);
+}
+.logo-text{font-size:1.05rem;font-weight:700;letter-spacing:.04em;color:#e6edf3}
+.logo-sub{font-size:.58rem;color:#8b949e;letter-spacing:.08em;margin-top:1px}
+.status-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#2ed573;
+  box-shadow:0 0 8px rgba(46,213,115,0.6);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-        h1 {
-            font-size: 28px;
-        }
+/* ── Sekmeler ── */
+.tabs{
+  display:flex;gap:6px;
+  padding:12px 16px 0;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:7px 14px;border-radius:8px 8px 0 0;border:none;
+  background:transparent;color:#8b949e;font-size:.78rem;
+  cursor:pointer;white-space:nowrap;transition:all .18s;
+  font-family:inherit;font-weight:500;
+  border-bottom:2px solid transparent;
+  flex-shrink:0;
+}
+.tab.active{color:#e6edf3;border-bottom-color:#1a6ef0;background:rgba(26,110,240,0.08)}
+.tab:hover:not(.active){color:#c9d1d9;background:rgba(255,255,255,0.04)}
 
-        input {
-            padding: 12px;
-            width: 100%;
-            border-radius: 10px;
-            border: none;
-            margin-top: 20px;
-        }
+/* ── Ana alan ── */
+.main{flex:1;padding:16px;max-width:720px;width:100%;margin:0 auto}
 
-        button {
-            padding: 12px;
-            margin-top: 20px;
-            border-radius: 10px;
-            border: none;
-            background: #22c55e;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-        }
+/* ── Sohbet alanı ── */
+.chat-box{
+  min-height:320px;max-height:50vh;
+  overflow-y:auto;
+  padding:4px 0 8px;
+  scroll-behavior:smooth;
+}
+.chat-box::-webkit-scrollbar{width:4px}
+.chat-box::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
 
-        #sonuc {
-            margin-top: 25px;
-            font-size: 18px;
-            color: #38bdf8;
-        }
-    </style>
+/* Karşılama */
+.welcome{
+  text-align:center;padding:28px 16px 20px;
+}
+.welcome-icon{font-size:2.8rem;margin-bottom:10px;display:block;
+  filter:drop-shadow(0 0 14px rgba(26,110,240,0.5))}
+.welcome h1{
+  font-size:1.45rem;font-weight:700;
+  background:linear-gradient(90deg,#1a6ef0,#2ed573);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+}
+.welcome p{color:#8b949e;font-size:.83rem;line-height:1.5}
+
+/* Öneri kartları */
+.suggestions{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:8px;margin:0 0 14px;
+}
+.sug-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px;padding:10px 12px;
+  cursor:pointer;text-align:left;
+  transition:all .18s;
+  font-family:inherit;
+}
+.sug-card:hover,.sug-card:active{
+  background:rgba(26,110,240,0.08);
+  border-color:rgba(26,110,240,0.3);
+  transform:translateY(-1px);
+}
+.sug-icon{font-size:1.1rem;margin-bottom:4px;display:block}
+.sug-text{color:#c9d1d9;font-size:.75rem;line-height:1.4}
+.sug-cat{color:#4a5568;font-size:.65rem;margin-top:2px}
+
+/* Mesajlar */
+.msg{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start}
+.msg.user{flex-direction:row-reverse}
+.msg-avatar{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;margin-top:2px;
+}
+.msg.bot .msg-avatar{background:linear-gradient(135deg,#1a6ef0,#2ed573);color:#0d1117;font-weight:700}
+.msg.user .msg-avatar{background:rgba(255,255,255,0.08);font-size:.9rem}
+.msg-bubble{
+  max-width:80%;padding:10px 13px;
+  border-radius:4px 14px 14px 14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.07);
+  font-size:.87rem;line-height:1.6;color:#c9d1d9;
+}
+.msg.user .msg-bubble{
+  border-radius:14px 4px 14px 14px;
+  background:linear-gradient(135deg,rgba(26,110,240,0.25),rgba(26,110,240,0.15));
+  border-color:rgba(26,110,240,0.3);
+  color:#e6edf3;
+}
+
+/* Kod bloğu */
+.code-block{
+  background:rgba(0,0,0,0.45);border:1px solid rgba(46,213,115,0.15);
+  border-radius:7px;padding:10px 12px;margin:6px 0;
+  font-family:'JetBrains Mono','Courier New',monospace;
+  font-size:.76rem;color:#2ed573;overflow-x:auto;
+  white-space:pre;line-height:1.55;
+}
+.code-lang{color:#4a5568;font-size:.65rem;margin-bottom:4px}
+
+/* Kutu formatı (┌─) */
+.box-block{
+  background:rgba(0,0,0,0.3);border:1px solid rgba(46,213,115,0.12);
+  border-radius:6px;padding:8px 10px;margin:6px 0;
+  font-family:monospace;font-size:.74rem;color:#7ee787;
+  white-space:pre;overflow-x:auto;line-height:1.5;
+}
+
+/* Typing dots */
+.dots{display:flex;gap:4px;padding:4px 0;align-items:center}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#1a6ef0;opacity:.7;
+  animation:dot-b 1.2s ease-in-out infinite;
+}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+@keyframes dot-b{0%,80%,100%{transform:scale(.6);opacity:.3}40%{transform:scale(1);opacity:1}}
+
+/* Hata */
+.error-bar{
+  background:rgba(240,60,60,0.08);border:1px solid rgba(240,60,60,0.2);
+  border-radius:8px;padding:8px 12px;color:#f85149;font-size:.78rem;margin-bottom:10px;
+}
+
+/* ── Hesaplama paneli ── */
+.calc-panel{display:none}
+.calc-panel.active{display:block}
+.module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+.module-btn{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);
+  border-radius:10px;padding:12px 10px;cursor:pointer;text-align:center;
+  transition:all .18s;font-family:inherit;
+}
+.module-btn:hover,.module-btn.sel{
+  background:rgba(26,110,240,0.1);border-color:rgba(26,110,240,0.4);
+}
+.module-btn .micon{font-size:1.3rem;margin-bottom:4px;display:block}
+.module-btn .mlabel{font-size:.73rem;color:#c9d1d9}
+.field-row{margin-bottom:10px}
+.field-row label{display:block;color:#8b949e;font-size:.72rem;margin-bottom:4px}
+.field-row input,.field-row select{
+  width:100%;background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);color:#e6edf3;
+  border-radius:8px;padding:8px 10px;font-family:inherit;
+  font-size:.85rem;outline:none;transition:border-color .15s;
+}
+.field-row input:focus,.field-row select:focus{border-color:#1a6ef0}
+.field-row select option{background:#161b22}
+.calc-btn{
+  width:100%;background:linear-gradient(135deg,#1a6ef0,#1a8ef0);
+  border:none;border-radius:10px;padding:12px;
+  color:#fff;font-weight:700;font-size:.9rem;
+  cursor:pointer;font-family:inherit;
+  transition:all .18s;
+  box-shadow:0 4px 16px rgba(26,110,240,0.3);
+}
+.calc-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,110,240,0.4)}
+.calc-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.result-box{
+  background:rgba(0,0,0,0.35);border:1px solid rgba(46,213,115,0.2);
+  border-radius:10px;padding:14px;margin-top:12px;
+  font-family:monospace;font-size:.8rem;color:#7ee787;
+  white-space:pre-wrap;line-height:1.6;display:none;
+}
+.result-box.show{display:block}
+
+/* ── Giriş alanı ── */
+.input-area{
+  padding:12px 16px 16px;
+  background:rgba(13,17,23,0.85);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding-bottom:max(16px,env(safe-area-inset-bottom));
+}
+.input-wrap{
+  display:flex;gap:8px;align-items:flex-end;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:13px;padding:8px 10px;
+  max-width:720px;margin:0 auto;
+  transition:border-color .15s;
+}
+.input-wrap:focus-within{border-color:rgba(26,110,240,0.4)}
+.input-wrap textarea{
+  flex:1;background:transparent;border:none;outline:none;
+  color:#e6edf3;font-size:.9rem;font-family:inherit;
+  resize:none;min-height:24px;max-height:130px;
+  line-height:1.5;caret-color:#1a6ef0;
+}
+.input-wrap textarea::placeholder{color:#3a4555}
+.send-btn{
+  width:34px;height:34px;border-radius:50%;border:none;flex-shrink:0;
+  background:linear-gradient(135deg,#1a6ef0,#2ed573);
+  color:#0d1117;font-size:.95rem;font-weight:700;
+  cursor:pointer;transition:all .18s;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 10px rgba(26,110,240,0.35);
+}
+.send-btn:disabled{background:rgba(255,255,255,0.08);color:#3a4555;box-shadow:none;cursor:not-allowed}
+.send-hint{text-align:center;color:#1e2a38;font-size:.65rem;margin-top:5px;max-width:720px;margin-left:auto;margin-right:auto}
+
+/* Inline format */
+strong{color:#e6edf3}
+code{background:rgba(0,0,0,0.4);color:#7ee787;padding:0 4px;border-radius:3px;font-family:monospace;font-size:.85em}
+em{color:#8b949e}
+a{color:#1a6ef0;text-decoration:none}
+</style>
 </head>
-
 <body>
 
-<div class="box">
-    <h1>🚀 CIRAKAI ENGINE</h1>
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">🚀</div>
+    <div>
+      <div class="logo-text">CIRAKAI ENGINE</div>
+      <div class="logo-sub">POWERED BY YUMAK AI · AO&MAZ TECH</div>
+    </div>
+  </div>
+  <div class="status-dot" id="statusDot"></div>
+</header>
 
-    <p>Mühendislik hesaplamaları yap</p>
+<!-- Sekmeler -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('chat',this)">💬 Asistan</button>
+  <button class="tab" onclick="switchTab('calc',this)">⚙️ Hesapla</button>
+  <button class="tab" onclick="switchTab('hydrogen',this)">⚗️ Hidrojen</button>
+  <button class="tab" onclick="switchTab('stress',this)">🔩 Gerilme</button>
+  <button class="tab" onclick="switchTab('geo',this)">📐 Geometri</button>
+  <button class="tab" onclick="switchTab('material',this)">🧲 Malzeme</button>
+</div>
 
-    <input id="input" placeholder="Örn: 10 5 2">
+<!-- Ana alan -->
+<div class="main">
 
-    <button onclick="hesapla()">HESAPLA</button>
+  <!-- SOHBET -->
+  <div id="panel-chat">
+    <div class="chat-box" id="chatBox">
+      <div class="welcome">
+        <span class="welcome-icon">🚀</span>
+        <h1>CIRAKAI ENGINE</h1>
+        <p>Mühendislik, bilim ve her konuda<br>yapay zeka destekli asistanınız</p>
+      </div>
+      <div class="suggestions" id="suggestions">
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Hidrojen depolama tankı nasıl tasarlanır?"><span class="sug-icon">⚗️</span><span class="sug-text">H₂ tank tasarımı</span><span class="sug-cat">Mühendislik</span></button>
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Möbius şeridinin topolojik özellikleri nelerdir?"><span class="sug-icon">∿</span><span class="sug-text">Möbius topolojisi</span><span class="sug-cat">Matematik</span></button>
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Berry fazası frekansı nedir, nasıl hesaplanır?"><span class="sug-icon">⚛️</span><span class="sug-text">Berry fazası</span><span class="sug-cat">Fizik</span></button>
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Von Mises gerilme kriteri nasıl uygulanır?"><span class="sug-icon">🔩</span><span class="sug-text">Von Mises</span><span class="sug-cat">Malzeme</span></button>
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Python ile numpy kullanarak matris çarpımı nasıl yapılır?"><span class="sug-icon">💻</span><span class="sug-text">NumPy matris</span><span class="sug-cat">Kodlama</span></button>
+        <button class="sug-card" onclick="sendSug(this.dataset.q)" data-q="Faraday elektroliz yasasını açıklar mısın?"><span class="sug-icon">⚡</span><span class="sug-text">Faraday yasası</span><span class="sug-cat">Kimya</span></button>
+      </div>
+    </div>
+    <div id="errorBar" class="error-bar" style="display:none"></div>
+  </div>
 
-    <div id="sonuc"></div>
+  <!-- HESAPLA — Genel -->
+  <div id="panel-calc" class="calc-panel">
+    <div class="module-grid">
+      <button class="module-btn sel" onclick="selectModule('physics',this)"><span class="micon">⚡</span><span class="mlabel">Fizik (F=ma)</span></button>
+      <button class="module-btn" onclick="selectModule('fluid',this)"><span class="micon">🌊</span><span class="mlabel">Akışkan</span></button>
+      <button class="module-btn" onclick="selectModule('thermal',this)"><span class="micon">🌡️</span><span class="mlabel">Isıl Analiz</span></button>
+      <button class="module-btn" onclick="selectModule('optimize',this)"><span class="micon">📈</span><span class="mlabel">Optimizasyon</span></button>
+    </div>
+    <div id="moduleFields"></div>
+    <button class="calc-btn" id="calcBtn" onclick="runCalc()">HESAPLA</button>
+    <div class="result-box" id="resultBox"></div>
+  </div>
+
+  <!-- HİDROJEN -->
+  <div id="panel-hydrogen" class="calc-panel">
+    <div class="field-row"><label>Güç (kW)</label><input type="number" id="h2_power" value="5" min="0.1" step="0.5"/></div>
+    <div class="field-row"><label>Süre (saat)</label><input type="number" id="h2_dur" value="1" min="0.1" step="0.5"/></div>
+    <div class="field-row"><label>Hücre Gerilimi (V)</label><input type="number" id="h2_volt" value="1.8" step="0.05"/></div>
+    <div class="field-row"><label>Faradaik Verim (%)</label><input type="number" id="h2_eff" value="95" min="50" max="100"/></div>
+    <div class="field-row"><label>Depolama Basıncı (bar)</label><input type="number" id="h2_pres" value="350" step="10"/></div>
+    <button class="calc-btn" onclick="runH2()">HİDROJEN SİSTEM HESAPLA</button>
+    <div class="result-box" id="h2Result"></div>
+  </div>
+
+  <!-- GERİLME -->
+  <div id="panel-stress" class="calc-panel">
+    <div class="field-row">
+      <label>Analiz Tipi</label>
+      <select id="stressType" onchange="updateStressFields()">
+        <option value="general">Genel Gerilme (σx, σy, τxy)</option>
+        <option value="vessel">Basınçlı Kap (İnce Cidar)</option>
+      </select>
+    </div>
+    <div id="stressFields"></div>
+    <button class="calc-btn" onclick="runStress()">GERİLME ANALİZİ</button>
+    <div class="result-box" id="stressResult"></div>
+  </div>
+
+  <!-- GEOMETRİ -->
+  <div id="panel-geo" class="calc-panel">
+    <div class="field-row">
+      <label>Şekil</label>
+      <select id="geoShape" onchange="updateGeoFields()">
+        <option value="cylinder">Silindir</option>
+        <option value="sphere">Küre</option>
+        <option value="box">Dikdörtgen Prizma</option>
+        <option value="torus">Torus (Halka)</option>
+        <option value="cone">Koni</option>
+        <option value="hollow_cyl">İçi Boş Silindir (Boru)</option>
+      </select>
+    </div>
+    <div id="geoFields"></div>
+    <button class="calc-btn" onclick="runGeo()">GEOMETRİ HESAPLA</button>
+    <div class="result-box" id="geoResult"></div>
+  </div>
+
+  <!-- MALZEME -->
+  <div id="panel-material" class="calc-panel">
+    <div class="field-row">
+      <label>Malzeme Seç</label>
+      <select id="matSel">
+        <option value="çelik">Yapısal Çelik S235</option>
+        <option value="ss304">Paslanmaz Çelik 304</option>
+        <option value="316l">Paslanmaz Çelik 316L</option>
+        <option value="alüminyum">Alüminyum 6061-T6</option>
+        <option value="al7075">Alüminyum 7075-T6</option>
+        <option value="titanyum">Titanyum Ti-6Al-4V</option>
+        <option value="inconel">Inconel 625</option>
+        <option value="bakır">Bakır C110</option>
+        <option value="karbon fiber">CFRP Karbon Fiber</option>
+        <option value="ptfe">PTFE (Teflon)</option>
+        <option value="pla">PLA (3B Baskı)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="runMaterial()">MALZEME BİLGİSİ GETİR</button>
+    <div class="result-box" id="matResult"></div>
+  </div>
+
+</div>
+
+<!-- Giriş alanı (sadece sohbet sekmesinde) -->
+<div class="input-area" id="inputArea">
+  <div class="input-wrap">
+    <textarea id="userInput" rows="1" placeholder="Sorunuzu yazın..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+  </div>
+  <div class="send-hint">Enter ↵ gönder · Shift+Enter yeni satır</div>
 </div>
 
 <script>
-function hesapla() {
-    let text = document.getElementById("input").value;
+// ── Sabitler ─────────────────────────────────────────────
+const API_URL = "https://api.anthropic.com/v1/messages";
+const SYSTEM  = `Sen CIRAKAI ENGINE — AO&MAZ Technology mühendislik asistanısın.
+Hidrojen sistemleri, plazma reaktörleri, basınçlı kaplar, malzeme bilimi, topoloji,
+ileri matematik ve genel mühendislik konularında uzman yorumlar yaparsın.
+Türkçe cevap ver. Sayısal sorularda formül ve hesap adımlarını göster.
+Çocuğa sade, uzmana teknik konuş. Emin olmadığın şeyi söyleme.`;
 
-    document.getElementById("sonuc").innerHTML = "Hesaplanıyor...";
+const FARADAY = 96485.33;
+const H2_EL   = 2;
+const H2_VM   = 0.02241;
+const GAS_R   = 8.314;
+const PI      = Math.PI;
+
+let messages = [];
+let loading  = false;
+let curTab   = "chat";
+let curMod   = "physics";
+
+// ── Sekmeler ─────────────────────────────────────────────
+function switchTab(tab, btn) {
+  curTab = tab;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll("[id^='panel-']").forEach(p => p.style.display="none");
+  document.getElementById("panel-"+tab).style.display = "block";
+  document.getElementById("inputArea").style.display = tab==="chat" ? "block" : "none";
+
+  if(tab==="calc")     { selectModule(curMod, document.querySelector(".module-btn.sel")||document.querySelector(".module-btn")); }
+  if(tab==="stress")   updateStressFields();
+  if(tab==="geo")      updateGeoFields();
 }
-</script>
 
+// ── Sohbet ───────────────────────────────────────────────
+function autoResize(el) {
+  el.style.height="auto";
+  el.style.height=Math.min(el.scrollHeight,130)+"px";
+}
+function handleKey(e) {
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage();}
+}
+
+async function sendMessage(text) {
+  const t = text || document.getElementById("userInput").value.trim();
+  if(!t||loading) return;
+  document.getElementById("userInput").value="";
+  document.getElementById("userInput").style.height="auto";
+  document.getElementById("suggestions").style.display="none";
+  appendMsg("user", t);
+  messages.push({role:"user",content:t});
+  const lid = appendMsg("bot","loading");
+  setLoading(true);
+  try {
+    const r = await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        system:SYSTEM,
+        messages:messages.map(m=>({role:m.role,content:m.content}))
+      })
+    });
+    const d = await r.json();
+    if(d.error) throw new Error(d.error.message);
+    const reply = d.content.filter(b=>b.type==="text").map(b=>b.text).join("");
+    messages.push({role:"assistant",content:reply});
+    setMsgContent(lid, reply);
+  } catch(e) {
+    removeMsg(lid);
+    showError(e.message||"Bağlantı hatası");
+  } finally { setLoading(false); }
+}
+
+function sendSug(q){ sendMessage(q); }
+
+let msgCounter=0;
+function appendMsg(role, content) {
+  const id = "msg-"+(++msgCounter);
+  const box = document.getElementById("chatBox");
+  const div = document.createElement("div");
+  div.className = "msg "+role; div.id=id;
+  const av  = document.createElement("div"); av.className="msg-avatar";
+  av.textContent = role==="bot" ? "C" : "👤";
+  const bub = document.createElement("div"); bub.className="msg-bubble";
+  if(content==="loading"){
+    bub.innerHTML='<div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  } else {
+    bub.innerHTML = formatText(content);
+  }
+  div.appendChild(av); div.appendChild(bub);
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+  return id;
+}
+function setMsgContent(id, content) {
+  const bub = document.querySelector("#"+id+" .msg-bubble");
+  if(bub) bub.innerHTML=formatText(content);
+  document.getElementById("chatBox").scrollTop=9999;
+}
+function removeMsg(id){ const el=document.getElementById(id); if(el)el.remove(); }
+function setLoading(v){
+  loading=v;
+  const btn=document.getElementById("sendBtn");
+  btn.disabled=v; btn.textContent=v?"⏳":"↑";
+}
+function showError(msg){
+  const bar=document.getElementById("errorBar");
+  bar.textContent="⚠️ "+msg; bar.style.display="block";
+  setTimeout(()=>bar.style.display="none",5000);
+}
+
+// ── Metin formatlama ──────────────────────────────────────
+function formatText(text) {
+  const lines = text.split("\n"); let html=""; let i=0;
+  while(i<lines.length){
+    const l=lines[i];
+    if(/^#{1,3}\s/.test(l)){
+      html+=`<strong style="display:block;color:#e6edf3;margin:.6rem 0 .2rem">${l.replace(/^#+\s/,"")}</strong>`;
+    } else if(l.startsWith("```")){
+      const lang=l.slice(3).trim(); const code=[]; i++;
+      while(i<lines.length&&!lines[i].startsWith("```")){code.push(escHtml(lines[i]));i++;}
+      html+=`<div class="code-block">${lang?`<div class="code-lang">${lang}</div>`:""}${code.join("\n")}</div>`;
+    } else if(l.startsWith("┌")||l.startsWith("│")||l.startsWith("└")){
+      const block=[l]; i++;
+      while(i<lines.length&&(lines[i].startsWith("┌")||lines[i].startsWith("│")||lines[i].startsWith("└")||lines[i].startsWith("├"))){block.push(lines[i]);i++;}
+      html+=`<div class="box-block">${block.map(escHtml).join("\n")}</div>`;
+      continue;
+    } else if(/^[-*]\s/.test(l)){
+      html+="<ul style='margin:.2rem 0 .2rem 1rem;padding:0'>";
+      while(i<lines.length&&/^[-*]\s/.test(lines[i])){
+        html+=`<li style="color:#c9d1d9;font-size:.85rem;margin-bottom:.15rem">${inl(lines[i].replace(/^[-*]\s/,""))}</li>`;i++;
+      }
+      html+="</ul>"; continue;
+    } else if(l.trim()===""){
+      html+="<div style='height:.3rem'></div>";
+    } else {
+      html+=`<p style="margin:.1rem 0;color:#c9d1d9;font-size:.87rem;line-height:1.6">${inl(l)}</p>`;
+    }
+    i++;
+  }
+  return html;
+}
+function inl(t){
+  return t
+    .replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>")
+    .replace(/`([^`]+)`/g,"<code>$1</code>")
+    .replace(/\*([^*]+)\*/g,"<em>$1</em>");
+}
+function escHtml(t){ return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+// ── Hesap Modülleri ───────────────────────────────────────
+const MODULE_DEFS = {
+  physics:{
+    fields:[
+      {id:"p_mass",label:"Kütle (kg)",val:1000,step:10},
+      {id:"p_vel", label:"Hız (m/s)",val:20,step:1},
+      {id:"p_time",label:"Süre (s)",val:5,step:0.5},
+    ],
+    calc(f){
+      const m=pf(f.p_mass),v=pf(f.p_vel),t=pf(f.p_time);
+      if(t<=0) return "HATA: Süre > 0 olmalı";
+      const a=v/t,F=m*a,KE=.5*m*v*v,p=m*v,P=F*v;
+      return `┌─── FİZİK HESAP ─────────────────────\n│  Kütle          : ${m} kg\n│  Hız            : ${v} m/s\n│  Süre           : ${t} s\n│\n│  İvme (a)       : ${a.toFixed(4)} m/s²\n│  Kuvvet (F)     : ${F.toFixed(2)} N\n│  Kinetik Enerji : ${KE.toFixed(2)} J\n│  Momentum (p)   : ${p.toFixed(2)} kg·m/s\n│  Anlık Güç      : ${P.toFixed(2)} W\n└──────────────────────────────────────`;
+    }
+  },
+  fluid:{
+    fields:[
+      {id:"fl_flow",label:"Kütlesel Debi (kg/h)",val:1,step:.1},
+      {id:"fl_dia", label:"Boru Çapı (mm)",val:25,step:1},
+      {id:"fl_len", label:"Uzunluk (m)",val:10,step:1},
+      {id:"fl_pres",label:"Giriş Basıncı (bar)",val:10,step:1},
+    ],
+    calc(f){
+      const m_h=pf(f.fl_flow),D=pf(f.fl_dia)/1000,L=pf(f.fl_len),P=pf(f.fl_pres);
+      const rho=0.0838*(P/1.01325);
+      const m_s=m_h/3600,Q=m_s/rho,A=PI*(D/2)**2,v=Q/A;
+      const mu=8.9e-6,Re=rho*v*D/mu;
+      let f_fric; if(Re<2300)f_fric=64/Re; else f_fric=(0.790*Math.log(Re)-1.64)**(-2);
+      const dP=f_fric*(L/D)*(rho*v*v/2)/1e5;
+      const reg=Re<2300?"Laminar":Re<4000?"Geçiş":"Türbülanslı";
+      const Ma=v/Math.sqrt(1.4*8.314*293/0.002016);
+      return `┌─── H₂ BORU HATTI ───────────────────\n│  Çap             : ${(D*1000).toFixed(1)} mm\n│  Uzunluk         : ${L} m\n│  Giriş Basınç    : ${P} bar\n│\n│  Akış Hızı       : ${v.toFixed(3)} m/s\n│  Reynolds        : ${Re.toFixed(0)} (${reg})\n│  Sürtünme Fak.   : ${f_fric.toFixed(5)}\n│  Basınç Düşümü   : ${dP.toFixed(4)} bar\n│  Çıkış Basıncı   : ${(P-dP).toFixed(3)} bar\n│  Mach            : ${Ma.toFixed(4)}\n└──────────────────────────────────────`;
+    }
+  },
+  thermal:{
+    fields:[
+      {id:"th_k",   label:"Isıl İletkenlik k (W/m·K)",val:50,step:1},
+      {id:"th_area",label:"Alan (m²)",val:0.01,step:.001},
+      {id:"th_T1",  label:"Sıcaklık 1 (°C)",val:300,step:10},
+      {id:"th_T2",  label:"Sıcaklık 2 (°C)",val:25,step:5},
+      {id:"th_L",   label:"Kalınlık (m)",val:0.005,step:.001},
+    ],
+    calc(f){
+      const k=pf(f.th_k),A=pf(f.th_area),T1=pf(f.th_T1),T2=pf(f.th_T2),L=pf(f.th_L);
+      const Q=k*A*(T1-T2)/L,R=L/(k*A);
+      return `┌─── DÜZLEMSEL ISIL İLETİM ───────────\n│  k               : ${k} W/m·K\n│  Alan            : ${A} m²\n│  ΔT              : ${T1-T2} °C\n│  Kalınlık        : ${L} m\n│\n│  Isı Akısı Q     : ${Q.toFixed(2)} W\n│  Termal Direnç R : ${R.toFixed(5)} K/W\n└──────────────────────────────────────`;
+    }
+  },
+  optimize:{
+    fields:[
+      {id:"op_power",label:"Güç Bütçesi (kW)",val:5,step:.5},
+      {id:"op_dur",  label:"Süre (saat)",val:1,step:.5},
+    ],
+    calc(f){
+      const P=pf(f.op_power),h=pf(f.op_dur);
+      // Basit DE: gerilim optimizasyonu
+      let best=999,bestV=1.8;
+      for(let vi=0;vi<=60;vi++){
+        const V=1.5+vi*0.01;
+        const I=(P*1000)/V;
+        const charge=I*h*3600;
+        const eta=0.95*Math.max(0,1-0.05*Math.max(0,V-1.8));
+        const mol=(charge*eta)/(H2_EL*FARADAY);
+        const vol=mol*H2_VM*1000;
+        const E=P*h;
+        const kWhPerNm3=E/vol;
+        if(kWhPerNm3<best){best=kWhPerNm3;bestV=V;}
+      }
+      const Iopt=(P*1000)/bestV;
+      const ch=Iopt*h*3600;
+      const eta=0.95*Math.max(0,1-0.05*Math.max(0,bestV-1.8));
+      const mol=(ch*eta)/(H2_EL*FARADAY);
+      const vol=mol*H2_VM*1000;
+      return `┌─── H₂ VARYASYONEL OPTİMİZASYON ────\n│  Güç             : ${P} kW\n│  Süre            : ${h} saat\n│\n│  Optimal Gerilim : ${bestV.toFixed(3)} V\n│  Optimal Akım    : ${Iopt.toFixed(2)} A\n│  H₂ Üretimi      : ${vol.toFixed(4)} Nm³\n│  Özgül Enerji    : ${best.toFixed(3)} kWh/Nm³\n│  (DE Grid Arama, 60 nokta)\n└──────────────────────────────────────`;
+    }
+  }
+};
+
+function pf(id){ return parseFloat(document.getElementById(id)?.value||0); }
+
+function selectModule(mod, btn) {
+  curMod=mod;
+  document.querySelectorAll(".module-btn").forEach(b=>b.classList.remove("sel"));
+  if(btn) btn.classList.add("sel");
+  const def=MODULE_DEFS[mod];
+  const el=document.getElementById("moduleFields");
+  el.innerHTML=def.fields.map(f=>`
+    <div class="field-row">
+      <label>${f.label}</label>
+      <input type="number" id="${f.id}" value="${f.val}" step="${f.step}">
+    </div>`).join("");
+  document.getElementById("resultBox").classList.remove("show");
+}
+
+function runCalc(){
+  const def=MODULE_DEFS[curMod];
+  if(!def) return;
+  const f={};
+  def.fields.forEach(fld=>f[fld.id]=pf(fld.id));
+  const res=def.calc(f);
+  const box=document.getElementById("resultBox");
+  box.textContent=res; box.classList.add("show");
+}
+
+// ── Hidrojen ─────────────────────────────────────────────
+function runH2(){
+  const P=parseFloat(document.getElementById("h2_power").value)||5;
+  const h=parseFloat(document.getElementById("h2_dur").value)||1;
+  const V=parseFloat(document.getElementById("h2_volt").value)||1.8;
+  const eff=parseFloat(document.getElementById("h2_eff").value)/100||0.95;
+  const pbar=parseFloat(document.getElementById("h2_pres").value)||350;
+
+  const I=(P*1000)/V;
+  const charge=I*h*3600;
+  const mol=(charge*eff)/(H2_EL*FARADAY);
+  const volNm3=mol*H2_VM*1000;
+  const massKg=mol*0.002016;
+  const E=P*h;
+  const hhv=volNm3*3.54;
+  const eta_E=(hhv/E*100).toFixed(1);
+
+  // Tank
+  const comp=1.01325/pbar;
+  const tankVol=volNm3*comp;
+  const r=Math.cbrt(tankVol/(3*PI));
+  const hTank=6*r;
+  const sigma_allow=(235e6/2.5);
+  const wallM=(pbar*1e5*r)/sigma_allow;
+
+  const warns=[];
+  if(V>2.2) warns.push("⚠️ Hücre gerilimi >2.2V — ısınma riski");
+  if(pbar>700) warns.push("⚠️ Basınç >700 bar — standart üstü");
+  if(eta_E<50) warns.push("⚠️ Enerji verimi <50% — sistem optimize edilmeli");
+
+  const box=document.getElementById("h2Result");
+  box.textContent=`┌─── HİDROJEN SİSTEM TASARIMI ────────
+│  [ÜRETİM — Faraday Yasası]
+│  Güç             : ${P} kW
+│  Süre            : ${h} saat
+│  Hücre Gerilimi  : ${V} V
+│  Akım            : ${I.toFixed(2)} A
+│  Faradaik Verim  : ${(eff*100).toFixed(0)}%
+│
+│  Üretilen H₂     : ${volNm3.toFixed(5)} Nm³
+│                  : ${(massKg*1000).toFixed(3)} g
+│  Harcanan Enerji : ${E.toFixed(3)} kWh
+│  Enerji Verimi   : %${eta_E}
+│
+│  [DEPOLAMA TANKI — ASME]
+│  Depolama Bas.   : ${pbar} bar
+│  Tank Hacmi      : ${(tankVol*1000).toFixed(4)} L
+│  Yarıçap (iç)    : ${(r*1000).toFixed(2)} mm
+│  Yükseklik       : ${(hTank*1000).toFixed(2)} mm
+│  Cidar Kalınlığı : ${(wallM*1000).toFixed(3)} mm
+└──────────────────────────────────────${warns.length?"\n"+warns.join("\n"):""}`;
+  box.classList.add("show");
+}
+
+// ── Gerilme ──────────────────────────────────────────────
+function updateStressFields(){
+  const t=document.getElementById("stressType").value;
+  const el=document.getElementById("stressFields");
+  if(t==="general"){
+    el.innerHTML=`
+      <div class="field-row"><label>σx (MPa)</label><input type="number" id="sx" value="100"></div>
+      <div class="field-row"><label>σy (MPa)</label><input type="number" id="sy" value="50"></div>
+      <div class="field-row"><label>τxy (MPa)</label><input type="number" id="txy" value="30"></div>
+      <div class="field-row"><label>Akma Dayanımı (MPa, 0=hesaplanmaz)</label><input type="number" id="yield" value="235"></div>`;
+  } else {
+    el.innerHTML=`
+      <div class="field-row"><label>Basınç (bar)</label><input type="number" id="pbar" value="350"></div>
+      <div class="field-row"><label>İç Yarıçap (mm)</label><input type="number" id="rin" value="100"></div>
+      <div class="field-row"><label>Cidar Kalınlığı (mm)</label><input type="number" id="wall" value="5"></div>
+      <div class="field-row"><label>Akma Dayanımı (MPa)</label><input type="number" id="syield" value="235"></div>`;
+  }
+}
+
+function runStress(){
+  const t=document.getElementById("stressType").value;
+  const box=document.getElementById("stressResult");
+  if(t==="general"){
+    const sx=pf("sx"),sy=pf("sy"),txy=pf("txy"),fy=pf("yield");
+    const vm=Math.sqrt(sx*sx-sx*sy+sy*sy+3*txy*txy);
+    const avg=(sx+sy)/2;
+    const R=Math.sqrt(((sx-sy)/2)**2+txy*txy);
+    const s1=avg+R,s2=avg-R;
+    const sf=fy>0?fy/vm:null;
+    const safe=sf?sf>=1:"N/A";
+    box.textContent=`┌─── GERİLME ANALİZİ (Von Mises) ────
+│  σx              : ${sx} MPa
+│  σy              : ${sy} MPa
+│  τxy             : ${txy} MPa
+│
+│  Ana Gerilmeler  : σ₁=${s1.toFixed(2)}, σ₂=${s2.toFixed(2)} MPa
+│  τ_maks          : ${R.toFixed(2)} MPa
+│  Mohr Merkezi    : ${avg.toFixed(2)} MPa
+│  Von Mises σ_vm  : ${vm.toFixed(2)} MPa
+│  Tresca          : ${(2*R).toFixed(2)} MPa
+${sf?`│  Güvenlik Faktörü: ${sf.toFixed(2)}  ${sf>=2?"✅":"sf>=1?" ⚠️":"🔴"}`:""}\n└──────────────────────────────────────`;
+  } else {
+    const p=pf("pbar")*1e5,r=pf("rin")/1000,t_=pf("wall")/1000,fy=pf("syield");
+    const hoop=(p*r/t_)/1e6;
+    const axial=hoop/2;
+    const vm=Math.sqrt(hoop*hoop-hoop*axial+axial*axial);
+    const sf=fy/vm;
+    box.textContent=`┌─── BASINÇLI KAP (İnce Cidar/ASME) ──
+│  Basınç          : ${(p/1e5).toFixed(0)} bar
+│  İç Yarıçap      : ${(r*1000).toFixed(1)} mm
+│  Cidar           : ${(t_*1000).toFixed(1)} mm
+│
+│  Hoop Gerilme    : ${hoop.toFixed(2)} MPa
+│  Eksenel Gerilme : ${axial.toFixed(2)} MPa
+│  Von Mises       : ${vm.toFixed(2)} MPa
+│  Güvenlik Fak.   : ${sf.toFixed(2)}  ${sf>=2?"✅ Güvenli":sf>=1?"⚠️ Sınırda":"🔴 GÜVENSİZ"}
+└──────────────────────────────────────`;
+  }
+  box.classList.add("show");
+}
+
+// ── Geometri ─────────────────────────────────────────────
+const GEO_FIELDS = {
+  cylinder:{fields:["r_mm:Yarıçap (mm):50","h_mm:Yükseklik (mm):100"],calc(f){const r=f.r_mm/1e3,h=f.h_mm/1e3;const V=PI*r*r*h,A=2*PI*r*(r+h);return{V,A,cx:0,cy:0,cz:h/2,Izz:.5*r*r*V,Ixx:(3*r*r+h*h)/12*V};}},
+  sphere:{fields:["r_mm:Yarıçap (mm):50"],calc(f){const r=f.r_mm/1e3;const V=4/3*PI*r*r*r,A=4*PI*r*r;return{V,A,cx:0,cy:0,cz:0,Izz:.4*r*r*V,Ixx:.4*r*r*V};}},
+  box:{fields:["a_mm:En (mm):100","b_mm:Boy (mm):50","c_mm:Yükseklik (mm):30"],calc(f){const a=f.a_mm/1e3,b=f.b_mm/1e3,c=f.c_mm/1e3;const V=a*b*c,A=2*(a*b+b*c+a*c);return{V,A,cx:a/2,cy:b/2,cz:c/2,Izz:V/12*(a*a+b*b),Ixx:V/12*(b*b+c*c)};}},
+  torus:{fields:["R_mm:Büyük Yarıçap (mm):60","r_mm:Boru Yarıçapı (mm):15"],calc(f){const R=f.R_mm/1e3,r=f.r_mm/1e3;const V=2*PI*PI*R*r*r,A=4*PI*PI*R*r;return{V,A,cx:0,cy:0,cz:0,Izz:V*(R*R+3*r*r/4),Ixx:V*(R*R/2+5*r*r/8)};}},
+  cone:{fields:["r_mm:Taban Yarıçapı (mm):40","h_mm:Yükseklik (mm):80"],calc(f){const r=f.r_mm/1e3,h=f.h_mm/1e3,l=Math.sqrt(r*r+h*h);const V=PI*r*r*h/3,Al=PI*r*l,Ab=PI*r*r;return{V,A:Al+Ab,cx:0,cy:0,cz:h/4,Izz:.3*r*r*V,Ixx:3*(4*r*r+h*h)/80*V};}},
+  hollow_cyl:{fields:["ri_mm:İç Yarıçap (mm):30","ro_mm:Dış Yarıçap (mm):40","h_mm:Yükseklik (mm):100"],calc(f){const ri=f.ri_mm/1e3,ro=f.ro_mm/1e3,h=f.h_mm/1e3;const V=PI*(ro*ro-ri*ri)*h,A=2*PI*(ro+ri)*h+2*PI*(ro*ro-ri*ri);return{V,A,cx:0,cy:0,cz:h/2,Izz:.5*(ro*ro+ri*ri)*V,Ixx:(3*(ro*ro+ri*ri)+h*h)/12*V};}},
+};
+
+function updateGeoFields(){
+  const sh=document.getElementById("geoShape").value;
+  const def=GEO_FIELDS[sh];
+  const el=document.getElementById("geoFields");
+  el.innerHTML=def.fields.map(f=>{const[id,label,val]=f.split(":");return`<div class="field-row"><label>${label}</label><input type="number" id="g_${id}" value="${val}" step="1"></div>`;}).join("");
+  document.getElementById("geoResult").classList.remove("show");
+}
+
+function runGeo(){
+  const sh=document.getElementById("geoShape").value;
+  const def=GEO_FIELDS[sh];
+  const inputs={};
+  def.fields.forEach(f=>{const id=f.split(":")[0];inputs[id]=parseFloat(document.getElementById("g_"+id)?.value)||0;});
+  const r=def.calc(inputs);
+  const box=document.getElementById("geoResult");
+  box.textContent=`┌─── GEOMETRİ HESAP ──────────────────
+│  Hacim           : ${(r.V*1e6).toFixed(4)} cm³
+│                  : ${r.V.toFixed(6)} m³
+│  Yüzey Alanı     : ${(r.A*1e4).toFixed(4)} cm²
+│  Ağırlık Merkezi : x=${(r.cx*1000).toFixed(2)} y=${(r.cy*1000).toFixed(2)} z=${(r.cz*1000).toFixed(2)} mm
+│  Izz (eksenel)   : ${r.Izz.toExponential(3)} kg·m²·m³/kg
+│  Ixx (diyam.)    : ${r.Ixx.toExponential(3)} kg·m²·m³/kg
+└──────────────────────────────────────`;
+  box.classList.add("show");
+}
+
+// ── Malzeme ──────────────────────────────────────────────
+const MATS = {
+  "çelik":      {name:"Yapısal Çelik S235",rho:7850,E:210,nu:.30,sy:235,su:360,k:50,cp:490,alpha:12e-6,h2:true},
+  "ss304":      {name:"Paslanmaz Çelik 304",rho:8000,E:193,nu:.29,sy:215,su:505,k:16,cp:500,alpha:17.2e-6,h2:true},
+  "316l":       {name:"Paslanmaz Çelik 316L",rho:8000,E:193,nu:.29,sy:170,su:485,k:15,cp:500,alpha:16e-6,h2:true,note:"H₂ ve kriyojenik için tercih edilir"},
+  "alüminyum":  {name:"Alüminyum 6061-T6",rho:2700,E:68.9,nu:.33,sy:276,su:310,k:167,cp:896,alpha:23.6e-6,h2:true},
+  "al7075":     {name:"Alüminyum 7075-T6",rho:2810,E:71.7,nu:.33,sy:503,su:572,k:130,cp:960,alpha:23.4e-6,h2:true},
+  "titanyum":   {name:"Ti-6Al-4V",rho:4430,E:113.8,nu:.342,sy:880,su:950,k:6.7,cp:560,alpha:8.6e-6,h2:true,note:"Hafif yüksek mukavemetli tank"},
+  "inconel":    {name:"Inconel 625",rho:8440,E:207,nu:.31,sy:414,su:827,k:9.8,cp:410,alpha:12.8e-6,h2:true,note:"Yüksek T + korozyon — AKRO X-P uyumlu"},
+  "bakır":      {name:"Bakır C110",rho:8960,E:110,nu:.34,sy:70,su:220,k:385,cp:385,alpha:17e-6,h2:true},
+  "karbon fiber":{name:"CFRP",rho:1600,E:70,nu:.10,sy:600,su:800,k:5,cp:750,alpha:1e-6,h2:true,note:"Tip IV H₂ tank sarımı"},
+  "ptfe":       {name:"PTFE (Teflon)",rho:2200,E:0.5,nu:.46,sy:14,su:30,k:.25,cp:1000,alpha:112e-6,h2:true,note:"H₂ conta/vana"},
+  "pla":        {name:"PLA (3B Baskı)",rho:1240,E:3.5,nu:.36,sy:50,su:60,k:.13,cp:1800,alpha:68e-6,h2:false},
+};
+
+function runMaterial(){
+  const key=document.getElementById("matSel").value;
+  const m=MATS[key];
+  if(!m){return;}
+  const box=document.getElementById("matResult");
+  box.textContent=`┌─── MALZEME: ${m.name} ─────────────
+│  [MEKANİK]
+│  Yoğunluk       : ${m.rho} kg/m³
+│  E Modülü       : ${m.E} GPa
+│  Poisson        : ${m.nu}
+│  Akma Dayanımı  : ${m.sy} MPa
+│  Çekme Dayanımı : ${m.su} MPa
+│  [TERMAL]
+│  Isıl İletk.    : ${m.k} W/m·K
+│  Özgül Isı      : ${m.cp} J/kg·K
+│  Gen. Katsayısı : ${m.alpha.toExponential(2)} 1/K
+│  H₂ Uyumlu      : ${m.h2?"✅ Evet":"❌ Hayır"}
+${m.note?`│  Not            : ${m.note}`:""}
+└──────────────────────────────────────`;
+  box.classList.add("show");
+}
+
+// ── Başlangıç ─────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded",()=>{
+  // Sadece chat paneli görünür
+  document.querySelectorAll("[id^='panel-']").forEach(p=>p.style.display="none");
+  document.getElementById("panel-chat").style.display="block";
+  selectModule("physics",null);
+  updateStressFields();
+  updateGeoFields();
+  document.getElementById("userInput").focus();
+});
+</script>
 </body>
 </html>
