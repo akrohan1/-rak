@@ -1,101 +1,77 @@
-from flask import Flask, request, jsonify, render_template_string
-import requests
-import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+import datetime
 
 app = Flask(__name__)
+# Frontend HTML'in başka bir port/domain'den buraya veri atmasına izin verir
+CORS(app) 
 
-API_KEY = "BURAYA_API_KEY"
+DB_NAME = "b1x_partners.db"
 
-# ================= HTML =================
-html = """ 
-<!DOCTYPE html>
-<html>
-<head>
-<title>CIRAKAI ENGINE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body{background:#0f172a;color:white;font-family:Arial;text-align:center;margin-top:80px;}
-.box{background:#1e293b;padding:30px;border-radius:20px;display:inline-block;width:90%;max-width:500px;}
-textarea{width:100%;padding:10px;border-radius:10px;border:none;margin-top:10px;}
-button{margin-top:10px;padding:12px;border:none;border-radius:10px;background:#22c55e;color:white;}
-#sonuc{margin-top:20px;color:#38bdf8;}
-</style>
-</head>
+def init_db():
+    """İlk çalışmada veritabanını ve tabloyu oluşturur."""
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS partners (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            linkedin TEXT NOT NULL,
+            role TEXT NOT NULL,
+            message TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    conn.commit()
+    conn.close()
 
-<body>
-<div class="box">
-<h1>🚀 CIRAKAI ENGINE</h1>
-
-<textarea id="input" placeholder="Sorunu yaz..."></textarea>
-<button onclick="gonder()">GÖNDER</button>
-
-<div id="sonuc"></div>
-</div>
-
-<script>
-function gonder(){
-    let text = document.getElementById("input").value;
-
-    document.getElementById("sonuc").innerText = "Yükleniyor...";
-
-    fetch("/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({message:text})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        document.getElementById("sonuc").innerText = data.reply;
-    })
-    .catch(()=>{
-        document.getElementById("sonuc").innerText = "Hata oluştu";
-    });
-}
-</script>
-
-</body>
-</html>
-"""
-
-# ================= ROUTES =================
-
-@app.route("/")
-def home():
-    return render_template_string(html)
-
-@app.route("/chat", methods=["POST"])
-def chat():
-    data = request.json
-    user_msg = data.get("message", "")
-
-    headers = {
-        "x-api-key": API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json"
-    }
-
-    body = {
-        "model": "claude-3-sonnet-20240229",
-        "max_tokens": 500,
-        "messages": [
-            {"role": "user", "content": user_msg}
-        ]
-    }
+@app.route('/api/register', methods=['POST'])
+def register():
+    """HTML formundan gelen JSON verisini yakalar ve DB'ye yazar."""
+    data = request.get_json()
+    
+    if not data or not data.get('name') or not data.get('email'):
+        return jsonify({"status": "error", "message": "Eksik bilgi gönderildi."}), 400
 
     try:
-        res = requests.post(
-            "https://api.anthropic.com/v1/messages",
-            headers=headers,
-            json=body
-        )
+        conn = sqlite3.connect(DB_NAME)
+        c = conn.cursor()
+        c.execute('''
+            INSERT INTO partners (name, email, linkedin, role, message, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (
+            data['name'], 
+            data['email'], 
+            data['linkedin'], 
+            data['role'], 
+            data['message'],
+            datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ))
+        conn.commit()
+        conn.close()
+        
+        print(f"🔥 YENİ ORTAK GELDİ: {data['name']} - Rol: {data['role']}")
+        return jsonify({"status": "success", "message": "Kayıt başarıyla alındı."}), 201
 
-        data = res.json()
-        reply = data["content"][0]["text"]
+    except Exception as e:
+        print(f"Hata oluştu: {e}")
+        return jsonify({"status": "error", "message": "Veritabanı hatası."}), 500
 
-    except:
-        reply = "AI bağlantı hatası"
+@app.route('/api/admin/list', methods=['GET'])
+def get_list():
+    """(GİZLİ) Senin kaç kişinin kayıt olduğunu görmen için basit bir endpoint."""
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute("SELECT * FROM partners ORDER BY id DESC")
+    rows = c.fetchall()
+    conn.close()
+    
+    return jsonify({"total_count": len(rows), "partners": rows})
 
-    return jsonify({"reply": reply})
-
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    # Veritabanını başlat ve sunucuyu çalıştır
+    init_db()
+    print("🚀 B1x Backend ÇırakAI sisteminde aktif! Port: 5000 dinleniyor...")
+    app.run(debug=True, host='0.0.0.0', port=5000)
