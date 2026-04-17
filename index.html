@@ -13,10 +13,10 @@
         .subtitle { font-size: 1.2rem; color: var(--text-gray); max-width: 600px; margin: 0 auto 30px auto; }
         .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
         .card { background-color: #151515; padding: 30px; border-radius: 8px; border: 1px solid #333; transition: transform 0.3s ease; }
         .card h3 { color: var(--primary-color); margin-top: 0; }
-        .btn { display: inline-block; background-color: var(--primary-color); color: #000; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 1.1rem; cursor: pointer; border: none; transition: all 0.3s; }
+        .btn { display: inline-block; background-color: var(--primary-color); color: #000; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 1.1rem; cursor: pointer; border: none; transition: all 0.3s; text-align: center; }
         .btn:hover { transform: scale(1.05); background-color: #00cc6e; }
         .progress-bar { width: 100%; background-color: #222; border-radius: 10px; margin: 20px 0; overflow: hidden; }
         .progress-fill { height: 10px; background-color: var(--primary-color); width: 1.3%; }
@@ -31,7 +31,7 @@
 
     <header>
         <h1>Büyük Fonların Değil,<br><span>1000 Dahinin Ortağı: B1x</span></h1>
-        <p class="subtitle">Çırak AI tarafından tasarlanan ilk fiziksel prototip. Yumak-Kronos rezonans modeliyle havacılık ve enerji standartlarını yeniden yazıyoruz.</p>
+        <p class="subtitle">Çırak AI tarafından tasarlanan ilk fiziksel prototip. Yumak-Kronos rezonans modeliyle havacılık ve enerji standartlarını İzmit'ten yeniden yazıyoruz.</p>
         <a href="#register" class="btn">Ön Kayıt Listesine Katıl</a>
         
         <div style="max-width: 400px; margin: 40px auto 0 auto; text-align: left;">
@@ -48,42 +48,67 @@
         <div class="grid-2">
             <div class="card">
                 <h3>⚡ Saf Sermaye, Sıfır Maaş</h3>
-                <p>Toplanan fonun tamamı AR-GE'ye, Metal 3D Yazıcılara ve Bor-Ester stoklarına aktarılır. Kurucu ekip maaş değil, gelecek vizyonu alır.</p>
+                <p>Toplanan fonun tamamı AR-GE'ye ve Metal 3D Yazıcılara aktarılır. Kurucu ekip maaş değil, gelecek vizyonu alır.</p>
             </div>
             <div class="card">
                 <h3>🧠 Çırak AI Tasarımı</h3>
-                <p>B1x prototipi, insani hatalardan arındırılmış, Çırak AI simülasyon motoruyla optimize edilmiş kusursuz bir mühendislik ürünüdür.</p>
+                <p>B1x prototipi, Çırak AI simülasyon motoruyla optimize edilmiş, havacılıkta devrim yaratacak bir mühendislik ürünüdür.</p>
             </div>
             <div class="card">
                 <h3>⚙️ Üretim Ortaklığı</h3>
-                <p>Endüstriyel kapasitesini (CNC, Lazer, 3D Metal) projeye açan atölyeler, ISFİZARİ ekosisteminin doğal üretim ortağıdır.</p>
+                <p>Kapasitesini (CNC, Lazer, 3D Metal) projeye açan her atölye, ISFİZARİ ekosisteminin doğal üretim ortağıdır.</p>
             </div>
             <div class="card">
                 <h3>🛡️ Bağımsız Şeffaflık</h3>
-                <p>Tüm teknik manifestolar ve rezonans test verileri GitHub üzerinden "Açık Kartlar" ilkesiyle yayınlanır.</p>
+                <p>Tüm teknik manifestolar ve test verileri GitHub üzerinden "Açık Kartlar" ilkesiyle yayınlanır.</p>
             </div>
         </div>
+    </div>
+
+    <div class="container" style="border-top: 1px solid #222; padding-top: 60px;">
+        <h2 style="text-align: center; margin-bottom: 40px;">B1x Stratejik İş Planı</h2>
+        <div style="position: relative; padding-left: 30px; border-left: 2px solid var(--primary-color); margin: 0 auto; max-width: 700px;">
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--primary-color);">1. Faz: Dijital İkiz ve Simülasyon (Mevcut)</h3>
+                <p style="color: var(--text-gray);">Çırak AI motoru üzerinde Yumak-Kronos rezonans modelinin aerodinamik testleri tamamlanıyor.</p>
+            </div>
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--primary-color);">2. Faz: İlk Prototip Üretimi (Q3 2026)</h3>
+                <p style="color: var(--text-gray);">1000 kurucu ortaktan gelen sermaye ile Metal 3D yazıcı parkuru kuruluyor ve B1x gövdesi üretiliyor.</p>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: var(--primary-color);">3. Faz: Seri Üretim ve Lisanslama (2028+)</h3>
+                <p style="color: var(--text-gray);">ISFİZARİ üretim ortaklarıyla büyük ölçekli imalat ve teknolojinin global devlere lisanslanması.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="text-align: center; padding: 60px 20px; background-color: #0f0f0f; border-radius: 12px; margin-top: 40px; border: 1px solid #222;">
+        <h3 style="color: var(--primary-color); margin-bottom: 10px; font-size: 1.8rem;">Stratejik İş Birliği</h3>
+        <p style="color: var(--text-gray); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            Kurumsal yatırım veya teknik ortaklık için doğrudan LinkedIn üzerinden randevu talep edebilirsiniz.
+        </p>
+        <a href="https://www.linkedin.com/in/oguzhanyumak/" target="_blank" class="btn" style="background-color: #0077b5; color: white; border: none; padding: 18px 40px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+            <svg style="width: 20px; fill: white;" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn Üzerinden İletişime Geç
+        </a>
     </div>
 
     <div id="register" class="form-section">
         <div class="form-container">
             <h2 style="text-align: center; color: var(--primary-color);">Geleceğe Katıl</h2>
-            <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">İlk 1000 Kurucu Ortak Listesine dahil olmak için form doldurun.</p>
-            
+            <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Kurucu Ortak Listesine dahil olmak için form doldurun.</p>
             <form id="waitlist-form">
                 <input type="text" id="name" placeholder="Ad Soyad veya Kurum" required>
                 <input type="email" id="email" placeholder="E-posta Adresi" required>
                 <input type="url" id="linkedin" placeholder="LinkedIn Profil Linki" required>
-                
                 <select id="role" required>
                     <option value="" disabled selected>Katılım Türü</option>
                     <option value="investor">Kurucu Yatırımcı (İlk 1000)</option>
-                    <option value="engineer">Mühendis / Tasarımcı (Hisse Odaklı)</option>
-                    <option value="machine">Üretim / Makine Parkuru Ortağı</option>
+                    <option value="engineer">Mühendis / Tasarımcı</option>
+                    <option value="machine">Üretim Ortağı</option>
                 </select>
-
-                <textarea id="message" rows="4" placeholder="Vizyonumuza katma değeriniz ne olacak?"></textarea>
-                
+                <textarea id="message" rows="4" placeholder="Vizyonumuza nasıl katkı sağlarsınız?"></textarea>
                 <button type="submit" class="btn" style="width: 100%;">Tetiği Çek (Başvuruyu Gönder)</button>
             </form>
             <div id="status-message" style="margin-top: 20px; text-align: center; font-weight: bold; display: none;"></div>
@@ -100,7 +125,6 @@
     <script>
         document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const data = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -108,31 +132,28 @@
                 role: document.getElementById('role').value,
                 message: document.getElementById('message').value
             };
-
             const statusDiv = document.getElementById('status-message');
             statusDiv.style.display = 'block';
             statusDiv.style.color = '#a0a0a0';
-            statusDiv.innerText = 'Veriler Çırak AI Üssüne İletiliyor...';
-
+            statusDiv.innerText = 'İletiliyor...';
             try {
-                // RENDER ADRESİNİ BURAYA YAPIŞTIRMAYI UNUTMA
+                // RENDER ADRESINI BURAYA EKLE
                 const response = await fetch('https://b1x-backend-xxxx.onrender.com/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-
                 if(response.ok) {
                     statusDiv.style.color = 'var(--primary-color)';
-                    statusDiv.innerText = 'Hoş geldin! Kaydın ISFİZARİ sistemine başarıyla eklendi.';
+                    statusDiv.innerText = 'Kaydınız ISFİZARİ sistemine eklendi!';
                     document.getElementById('waitlist-form').reset();
                 } else {
                     statusDiv.style.color = '#ff4444';
-                    statusDiv.innerText = 'Sistemde bir aksama oldu, lütfen tekrar deneyin.';
+                    statusDiv.innerText = 'Hata oluştu, tekrar deneyin.';
                 }
             } catch (error) {
                 statusDiv.style.color = '#ff4444';
-                statusDiv.innerText = 'Backend sunucusuna ulaşılamadı. Sunucu ayarlarını kontrol edin.';
+                statusDiv.innerText = 'Sunucu bağlantı hatası.';
             }
         });
     </script>
