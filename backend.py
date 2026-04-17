@@ -13,7 +13,7 @@ CORS(app)
 # --- AYARLAR ---
 DB_NAME = "b1x_partners.db"
 GMAIL_USER = "akrobathan@gmail.com" # Gönderen e-posta
-GMAIL_PASS = "BURAYA_UYGULAMA_SIFRESI_GELECEK" # Gmail "Uygulama Şifresi"
+GMAIL_PASS = "tlan nsyq mpfj iorg" # Gmail "Uygulama Şifresi"
 RECEIVER_EMAIL = "akrobathan@gmail.com" # Bildirimin gideceği adres
 
 def send_email(partner_data):
